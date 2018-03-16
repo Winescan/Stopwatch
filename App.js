@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     flex: 1,
+    alignSelf: 'stretch',
   },
   welcome: {
     fontSize: 20,
