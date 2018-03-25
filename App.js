@@ -30,9 +30,11 @@ const styles = StyleSheet.create({
   linearGradient: {
     flex: 1,
     alignSelf: 'stretch',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   panel: {
-    width: 200,
-    height: 200,
+    height: 375,
+    aspectRatio: 0.9,
   }
 });
