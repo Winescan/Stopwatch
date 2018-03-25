@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Button,
   Image,
   StyleSheet,
   Text,
@@ -7,26 +8,30 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
+import Duration from './Duration';
+
 type Props = {};
 export default class App extends Component<Props> {
   constructor(props) {
     super(props);
+
     this.state = {
       intervalId: -1,
       isTicking: false,
-      originalDuration: new Duration(),
       timerDuration: new Duration()
     };
+
+    this.handleStart = this.handleStart.bind(this);
+    this.handleStop = this.handleStop.bind(this);
+    this.handleClear = this.handleClear.bind(this);
   }
 
   handleStart() {
     var intervalId = setInterval(() => {
       this.setState(previousState => {
-        assert(previousState.intervalId !== -1);
         return {
           intervalId: previousState.intervalId,
           isTicking: previousState.isTicking,
-          originalDuration: previousState.originalDuration,
           timerDuration: previousState.timerDuration.tick()
         };
       });
@@ -36,9 +41,8 @@ export default class App extends Component<Props> {
       return {
         intervalId: intervalId,
         isTicking: true,
-        originalDuration: previousState.originalDuration,
-        timerDuration: previousState.originalDuration
-      }
+        timerDuration: previousState.timerDuration
+      };
     });
   }
 
@@ -49,9 +53,8 @@ export default class App extends Component<Props> {
       return {
         intervalId: -1,
         isTicking: false,
-        originalDuration: new Duration(),
-
-      }
+        timerDuration: previousState.timerDuration
+      };
     });
   }
 
@@ -60,7 +63,9 @@ export default class App extends Component<Props> {
 
     this.setState(previousState => {
       return {
-        intervalId
+        intervalId: -1,
+        isTicking: false,
+        timerDuration: new Duration()
       };
     });
   }
@@ -70,9 +75,10 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <LinearGradient colors={['#ff00a0', '#ffe5b4']} style={styles.linearGradient}>
           <Image source={require('./img/panel.png')} style={styles.panel} />
-          <Button onClick={this.handleStart} style={styles.commandButton} />
-          <Button onClick={this.handleStop} style={styles.commandButton} />
-          <Button onClick={this.handleClear} style={styles.commandButton} />
+          <Button title="Start" onPress={this.handleStart} style={styles.commandButton} />
+          <Button title="Stop" onPress={this.handleStop} style={styles.commandButton} />
+          <Button title="Clear" onPress={this.handleClear} style={styles.commandButton} />
+          <Text style={styles.timerText}>Hello world. {this.state.timerDuration.toString()}</Text>
         </LinearGradient>
       </View>
     );
@@ -95,5 +101,7 @@ const styles = StyleSheet.create({
   panel: {
     height: 375,
     aspectRatio: 0.9,
-  }
+  },
+  timerText: {
+  },
 });
