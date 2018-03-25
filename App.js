@@ -19,8 +19,7 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <LinearGradient colors={['#ff00a0', '#ffe5b4']} style={styles.linearGradient}>
-          <SvgUri source={require('./img/panel.svg')} style={StyleSheet.flatten(styles.panel)}>
-          </SvgUri>
+          <SvgUri width="200" height="200" source={require('./img/panel.svg')} />
         </LinearGradient>
       </View>
     );
@@ -37,9 +36,5 @@ const styles = StyleSheet.create({
   linearGradient: {
     flex: 1,
     alignSelf: 'stretch',
-  },
-  panel: {
-    width: 200,
-    height: 200,
   },
 });
