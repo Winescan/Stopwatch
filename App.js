@@ -1,17 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
+  Image,
   StyleSheet,
   Text,
   View
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import SvgUri from 'react-native-svg-uri';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -19,7 +13,7 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <LinearGradient colors={['#ff00a0', '#ffe5b4']} style={styles.linearGradient}>
-          <SvgUri width="200" height="200" source={require('./img/panel.svg')} />
+          <Image source={require('./img/panel.png')} style={styles.panel} />
         </LinearGradient>
       </View>
     );
@@ -37,4 +31,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
   },
+  panel: {
+    width: 200,
+    height: 200,
+  }
 });
