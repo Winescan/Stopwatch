@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Button,
   Image,
   StyleSheet,
   Text,
@@ -81,16 +80,19 @@ export default class App extends Component<Props> {
         <LinearGradient colors={['#ff00a0', '#ffe5b4']} style={styles.linearGradient}>
           <View style={styles.panelContainer}>
             <Image source={require('./images/panel.png')} style={styles.panel} />
+
             <TouchableOpacity
               onPress={this.handleStart}
               style={[styles.commandButton, styles.startButton]}>
               <Text style={styles.commandText}>Start</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
               onPress={this.handleStop}
               style={[styles.commandButton, styles.stopButton]}>
               <Text style={styles.commandText}>Stop</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
               onPress={this.handleClear}
               style={[styles.commandButton, styles.clearButton]}>
@@ -119,7 +121,6 @@ const styles = StyleSheet.create({
   panelContainer: {
     height: 375,
     aspectRatio: 0.9,
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -137,11 +138,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  commandText: {
-    color: 'white',
-    fontFamily: 'Roboto',
-    fontSize: 20,
-  },
   startButton: {
     top: 10,
     left: 120,
@@ -153,6 +149,11 @@ const styles = StyleSheet.create({
   clearButton: {
     top: 195,
     right: 5,
+  },
+  commandText: {
+    color: 'white',
+    fontFamily: 'Roboto',
+    fontSize: 20,
   },
   timerText: {
     position: 'absolute',

@@ -25,6 +25,7 @@ export default class Duration {
     }
     
     format() {
+        // HH:mm:ss
         return this.hours.toString().padStart(2, '0') + ':' +
                this.minutes.toString().padStart(2, '0') + ':' +
                this.seconds.toString().padStart(2, '0');
