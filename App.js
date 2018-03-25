@@ -6,19 +6,12 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   View
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import SvgUri from 'react-native-svg-uri';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -26,15 +19,8 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <LinearGradient colors={['#ff00a0', '#ffe5b4']} style={styles.linearGradient}>
-          <Text style={styles.welcome}>
-            Welcome to React Native!
-          </Text>
-          <Text style={styles.instructions}>
-            To get started, edit App.js
-          </Text>
-          <Text style={styles.instructions}>
-            {instructions}
-          </Text>
+          <SvgUri source={require('./img/panel.svg')} style={StyleSheet.flatten(styles.panel)}>
+          </SvgUri>
         </LinearGradient>
       </View>
     );
@@ -52,14 +38,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  panel: {
+    width: 200,
+    height: 200,
   },
 });
