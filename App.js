@@ -4,6 +4,7 @@ import {
   Image,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -27,6 +28,10 @@ export default class App extends Component<Props> {
   }
 
   handleStart() {
+    if (this.state.isTicking) {
+      return;
+    }
+
     var intervalId = setInterval(() => {
       this.setState(previousState => {
         return {
@@ -74,11 +79,25 @@ export default class App extends Component<Props> {
     return (
       <View style={styles.container}>
         <LinearGradient colors={['#ff00a0', '#ffe5b4']} style={styles.linearGradient}>
-          <Image source={require('./img/panel.png')} style={styles.panel} />
-          <Button title="Start" onPress={this.handleStart} style={styles.commandButton} />
-          <Button title="Stop" onPress={this.handleStop} style={styles.commandButton} />
-          <Button title="Clear" onPress={this.handleClear} style={styles.commandButton} />
-          <Text style={styles.timerText}>Hello world. {this.state.timerDuration.toString()}</Text>
+          <View style={styles.panelContainer}>
+            <Image source={require('./images/panel.png')} style={styles.panel} />
+            <TouchableOpacity
+              onPress={this.handleStart}
+              style={[styles.commandButton, styles.startButton]}>
+              <Text style={styles.commandText}>Start</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.handleStop}
+              style={[styles.commandButton, styles.stopButton]}>
+              <Text style={styles.commandText}>Stop</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.handleClear}
+              style={[styles.commandButton, styles.clearButton]}>
+              <Text style={styles.commandText}>Clear</Text>
+            </TouchableOpacity>
+            <Text style={styles.timerText}>{this.state.timerDuration.format()}</Text>
+          </View>
         </LinearGradient>
       </View>
     );
@@ -90,7 +109,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
   linearGradient: {
     flex: 1,
@@ -98,10 +116,51 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  panel: {
+  panelContainer: {
     height: 375,
     aspectRatio: 0.9,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  panel: {
+    /* TODO: Nothing works if these values aren't hardcoded */
+    height: 375,
+    width: 0.9 * 375,
+    position: 'absolute',
+  },
+  commandButton: {
+    height: 100,
+    width: 100,
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  commandText: {
+    color: 'white',
+    fontFamily: 'Roboto',
+    fontSize: 20,
+  },
+  startButton: {
+    top: 10,
+    left: 120,
+  },
+  stopButton: {
+    top: 195,
+    left: 5,
+  },
+  clearButton: {
+    top: 195,
+    right: 5,
   },
   timerText: {
+    position: 'absolute',
+    top: 160,
+    left: 102,
+
+    color: 'white',
+    fontFamily: 'Roboto',
+    fontSize: 36,
   },
 });
